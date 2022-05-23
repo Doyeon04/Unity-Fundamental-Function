@@ -20,11 +20,25 @@ public class cshSelectionObject : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "SelectableObj")
                     Debug.Log(hit.transform.gameObject); // 충돌된 게임 오브젝트의 이름을 출력 
-            
-           
+                SetForce(hit.transform.gameObject);
+
+
+
             }
         }
 
     }
+
+    void SetForce(GameObject obj)
+    {
+        float power = Random.Range(500.0f, 1000.0f); // 오브젝트에 적용할 힘의 양 
+        Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f)); // 방향 (x,y,z) 지정 
+        dir = dir.normalized; // 방향만 구하고 싶을 때 주어진 벡터의 길이를 1로 
+        obj.GetComponent<Rigidbody>().AddForce(dir * power); // 오브젝트가 가지고 있는 rigidbody 속성을 얻어와 그 속성에 힘(방향 * 힘의 양)을 추가 
+
+    }
+
+
+
 }
 

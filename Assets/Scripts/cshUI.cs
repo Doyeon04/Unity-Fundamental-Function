@@ -17,5 +17,15 @@ public class cshUI : MonoBehaviour
         }
 
     }
+
+
+    public void DestroyAll()
+    {
+        GameObject[] boxes = GameObject.FindGameObjectsWithTag("SelectableObj"); // SelectableObj라는 태그를 가진 오브젝트를 다 찾아 배열에 넣음 
+        for (int i = 0; i < boxes.Length; i++)
+        {
+            Destroy(boxes[i]);
+        }
+    }
 }
 

@@ -27,6 +27,23 @@ public class cshSelectionObject : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("마우스 오른쪽 버튼 클릭");
+            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.transform.gameObject.tag == "SelectableObj")
+                {
+                    SetJump(hit.transform.gameObject);
+                }
+                   
+               
+            }
+
+        }
+
     }
 
     void SetForce(GameObject obj)
@@ -36,6 +53,11 @@ public class cshSelectionObject : MonoBehaviour
         dir = dir.normalized; // 방향만 구하고 싶을 때 주어진 벡터의 길이를 1로 
         obj.GetComponent<Rigidbody>().AddForce(dir * power); // 오브젝트가 가지고 있는 rigidbody 속성을 얻어와 그 속성에 힘(방향 * 힘의 양)을 추가 
 
+    }
+
+    void SetJump(GameObject obj)
+    {
+        obj.GetComponent<Rigidbody>().AddForce(Vector3.up * 6.0f, ForceMode.Impulse);
     }
 
 
